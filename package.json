@@ -1,21 +1,30 @@
 {
-  "name": "take-a-break",
+  "name": "touch-grass",
   "version": "1.0.0",
-  "description": "A desktop app that reminds users to take regular breaks with Pomodoro or custom timers.",
   "main": "main.js",
+  "author": "Harish <rengarajharish@gmail.com>",
+  "description": "A productivity break reminder desktop application to remind you to Touch Grass.",
   "scripts": {
-    "start": "electron . --no-sandbox"
+    "start": "electron . --no-sandbox",
+    "package": "electron-builder --linux"
   },
-  "keywords": [
-    "pomodoro",
-    "break",
-    "timer",
-    "productivity",
-    "electron"
-  ],
-  "author": "Antigravity",
-  "license": "MIT",
+  "build": {
+    "appId": "com.touchgrass.app",
+    "productName": "Touch Grass",
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility",
+      "icon": "icon.png"
+    }
+  },
   "devDependencies": {
-    "electron": "^31.0.0"
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
   }
 }
