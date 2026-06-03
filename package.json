@@ -1,0 +1,21 @@
+{
+  "name": "take-a-break",
+  "version": "1.0.0",
+  "description": "A desktop app that reminds users to take regular breaks with Pomodoro or custom timers.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox"
+  },
+  "keywords": [
+    "pomodoro",
+    "break",
+    "timer",
+    "productivity",
+    "electron"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

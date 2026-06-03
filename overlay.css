@@ -1,0 +1,220 @@
+/* Styling for the Fullscreen Break Overlay */
+
+:root {
+  --primary-color: #34D399; /* Mint green */
+  --primary-glow: rgba(52, 211, 153, 0.3);
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --text-dim: rgba(255, 255, 255, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent; /* Must be transparent for Electron overlay window */
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+}
+
+/* Glassmorphism Backdrop Blur Layout */
+.overlay-wrapper {
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.4); /* Transparent dark overlay (increased dim by 10%) */
+  backdrop-filter: blur(25px) saturate(120%); /* Blur the background applications */
+  -webkit-backdrop-filter: blur(25px) saturate(120%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Central Content Floating Layout */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: scale(0.95);
+  opacity: 0;
+  animation: scaleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Breathing Leaf Icon */
+.breathing-leaf-container {
+  margin-bottom: 24px;
+}
+
+.breathing-leaf {
+  animation: breath 4s ease-in-out infinite;
+  filter: drop-shadow(0 4px 15px rgba(52, 211, 153, 0.2));
+}
+
+@keyframes breath {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+    filter: drop-shadow(0 4px 10px rgba(52, 211, 153, 0.2));
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    filter: drop-shadow(0 10px 30px rgba(52, 211, 153, 0.5));
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+    filter: drop-shadow(0 4px 10px rgba(52, 211, 153, 0.2));
+  }
+}
+
+/* Overlay Title Text */
+.overlay-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+
+/* Timer Ring & Digits */
+.timer-ring-container {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg); /* Rotate to start at 12 o'clock */
+}
+
+.progress-ring-fg {
+  stroke-dasharray: 754; /* 2 * PI * 120 (Radius) */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.35s linear;
+  stroke-linecap: round;
+}
+
+.timer-digits-wrapper {
+  z-index: 2;
+}
+
+.timer-digits {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Motivational Suggestions Row */
+.suggestions-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.suggestion-item {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+.dot {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* Bottom Actions container (Skip Button) */
+.bottom-action-container {
+  position: absolute;
+  bottom: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-skip {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.btn-skip:hover, .btn-skip.hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.btn-skip:active {
+  transform: translateY(0);
+}
+
+/* --- ZEN MODE STYLING --- */
+.overlay-wrapper.zen-mode .overlay-title,
+.overlay-wrapper.zen-mode .suggestions-container,
+.overlay-wrapper.zen-mode .bottom-action-container {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.overlay-wrapper.zen-mode .timer-ring-container {
+  margin-bottom: 0px; /* Center it completely since others are hidden */
+  transition: margin-bottom 0.5s ease;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touch Grass Overlay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+  <!-- Fullscreen Glassmorphism Wrapper -->
+  <div class="overlay-wrapper" id="overlayWrapper">
+    
+    <!-- Central Content Area -->
+    <div class="center-content">
+      <!-- Breathing Icon (Leaf) -->
+      <div class="breathing-leaf-container">
+        <svg class="breathing-leaf" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="80" height="80">
+          <path fill="#10B981" d="M16,2C8,2,2,8,2,16c0,8,14,14,14,14s14-6,14-14C30,8,24,2,16,2z"/>
+          <path fill="#34D399" d="M16,2C12,6,10,12,10,16c0,5.5,4.5,10,10,10c0,0,4-6,4-10C24,10,20,4,16,2z"/>
+        </svg>
+      </div>
+
+      <!-- Header Label -->
+      <h1 class="overlay-title" id="overlayTitle">TOUCH GRASS</h1>
+
+      <!-- Countdown ring and digits -->
+      <div class="timer-ring-container">
+        <svg class="progress-ring" width="260" height="260">
+          <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.03)" stroke-width="4" fill="transparent" r="120" cx="130" cy="130"/>
+          <circle class="progress-ring-fg" id="breakProgressRing" stroke="#34D399" stroke-width="4" fill="transparent" r="120" cx="130" cy="130"/>
+        </svg>
+        <div class="timer-digits-wrapper">
+          <span class="timer-digits" id="breakDigits">05:00</span>
+        </div>
+      </div>
+
+      <!-- Suggestions/Motivational Text -->
+      <div class="suggestions-container" id="suggestionsContainer">
+        <p class="suggestion-item">Stretch your body</p>
+        <span class="dot">•</span>
+        <p class="suggestion-item">Hydrate</p>
+        <span class="dot">•</span>
+        <p class="suggestion-item">Rest your eyes</p>
+      </div>
+    </div>
+
+    <!-- Small Skip Button at the bottom center -->
+    <div class="bottom-action-container">
+      <button type="button" class="btn-skip interactive" id="skipBreakBtn">
+        ✕ Skip Break (Esc twice)
+      </button>
+    </div>
+
+  </div>
+
+  <script src="overlay.js"></script>
+</body>
+</html>
