@@ -1,6 +1,6 @@
 {
   "name": "touch-grass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "author": "Harish <rengarajharish@gmail.com>",
   "description": "A productivity break reminder desktop application to remind you to Touch Grass.",
@@ -15,6 +15,11 @@
   "build": {
     "appId": "com.touchgrass.app",
     "productName": "Touch Grass",
+    "publish": {
+      "provider": "github",
+      "owner": "reharish",
+      "repo": "touch-grass"
+    },
     "directories": {
       "output": "dist"
     },
