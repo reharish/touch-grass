@@ -1,0 +1,32 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger build and release on tags like v1.0.0 or v1.1.2
+
+jobs:
+  release:
+    name: Build & Release Linux Binaries
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Required for creating release drafts and uploading assets
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build and Publish Linux Release Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run package -- --publish always

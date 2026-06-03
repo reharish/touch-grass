@@ -4,6 +4,10 @@
   "main": "main.js",
   "author": "Harish <rengarajharish@gmail.com>",
   "description": "A productivity break reminder desktop application to remind you to Touch Grass.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reharish/touch-grass.git"
+  },
   "scripts": {
     "start": "electron . --no-sandbox",
     "package": "electron-builder --linux"
