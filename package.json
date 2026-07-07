@@ -14,13 +14,15 @@
   },
   "build": {
     "appId": "com.touchgrass.app",
-    "productName": "Touch Grass",
+    "productName": "touch-grass",
+    "executableName": "touch-grass",
     "publish": {
       "provider": "github",
       "owner": "reharish",
       "repo": "touch-grass"
     },
     "directories": {
+      "buildResources": "assets",
       "output": "dist"
     },
     "linux": {
@@ -29,7 +31,12 @@
         "deb"
       ],
       "category": "Utility",
-      "icon": "icon.png"
+      "icon": "assets/icons",
+      "desktop": {
+        "Name": "Touch Grass",
+        "Comment": "A productivity break reminder desktop application to remind you to Touch Grass.",
+        "StartupWMClass": "touch-grass"
+      }
     }
   },
   "devDependencies": {

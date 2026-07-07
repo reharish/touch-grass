@@ -54,7 +54,7 @@ let isPomodoro = defaultSettings.isPomodoro;
 let timerInterval = null;
 
 let mainWindow = null;
-let overlayWindow = null;
+let overlayWindows = [];
 let tray = null;
 
 function createMainWindow() {
@@ -98,49 +98,54 @@ function createMainWindow() {
 }
 
 function createOverlayWindow() {
-  if (overlayWindow) return;
+  if (overlayWindows.length > 0) return;
 
-  const primaryDisplay = screen.getPrimaryDisplay();
-  const { x, y, width, height } = primaryDisplay.bounds;
+  const displays = screen.getAllDisplays();
 
-  overlayWindow = new BrowserWindow({
-    x,
-    y,
-    width,
-    height,
-    transparent: true,
-    frame: false,
-    alwaysOnTop: true,
-    fullscreen: true,
-    skipTaskbar: true,
-    resizable: false,
-    enableLargerThanScreen: true,
-    hasShadow: false,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,
-      nodeIntegration: false
-    }
-  });
+  displays.forEach((display) => {
+    const { x, y, width, height } = display.bounds;
 
-  overlayWindow.setAlwaysOnTop(true, 'screen-saver');
-  overlayWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-  
-  // Disable click-through completely (always block input, skip button works natively)
-  overlayWindow.setIgnoreMouseEvents(false);
+    const overlay = new BrowserWindow({
+      x,
+      y,
+      width,
+      height,
+      transparent: true,
+      frame: false,
+      alwaysOnTop: true,
+      fullscreen: true,
+      skipTaskbar: true,
+      resizable: false,
+      enableLargerThanScreen: true,
+      hasShadow: false,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+        contextIsolation: true,
+        nodeIntegration: false
+      }
+    });
 
-  overlayWindow.loadFile('overlay.html');
-  
-  // Force focus to receive keyboard events immediately
-  overlayWindow.focus();
+    overlay.setAlwaysOnTop(true, 'screen-saver');
+    overlay.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+    
+    // Disable click-through completely (always block input, skip button works natively)
+    overlay.setIgnoreMouseEvents(false);
 
-  // Stream renderer console messages to Node terminal
-  overlayWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
-    console.log(`[OverlayWindow Console] Line ${line}: ${message}`);
-  });
+    overlay.loadFile('overlay.html');
+    
+    // Force focus to receive keyboard events immediately
+    overlay.focus();
 
-  overlayWindow.on('closed', () => {
-    overlayWindow = null;
+    // Stream renderer console messages to Node terminal
+    overlay.webContents.on('console-message', (event, level, message, line, sourceId) => {
+      console.log(`[OverlayWindow Console] Line ${line}: ${message}`);
+    });
+
+    overlay.on('closed', () => {
+      overlayWindows = overlayWindows.filter(win => win !== overlay);
+    });
+
+    overlayWindows.push(overlay);
   });
 }
 
@@ -269,9 +274,9 @@ function sendTimerUpdate() {
   if (mainWindow) {
     mainWindow.webContents.send('timer-tick', updateData);
   }
-  if (overlayWindow) {
-    overlayWindow.webContents.send('timer-tick', updateData);
-  }
+  overlayWindows.forEach(win => {
+    win.webContents.send('timer-tick', updateData);
+  });
 }
 
 function sendStateTransition() {
@@ -288,9 +293,9 @@ function sendStateTransition() {
   if (mainWindow) {
     mainWindow.webContents.send('state-transition', stateData);
   }
-  if (overlayWindow) {
-    overlayWindow.webContents.send('state-transition', stateData);
-  }
+  overlayWindows.forEach(win => {
+    win.webContents.send('state-transition', stateData);
+  });
 }
 
 function transitionToBreak() {
@@ -318,11 +323,9 @@ function transitionToWork() {
   timerState = 'WORKING';
   timeLeft = workDuration;
 
-  // Close overlay if open
-  if (overlayWindow) {
-    overlayWindow.close();
-    overlayWindow = null;
-  }
+  // Close all overlays if open
+  overlayWindows.forEach(win => win.close());
+  overlayWindows = [];
 
   // Play transition sound
   if (soundEnabled && mainWindow) {
@@ -401,10 +404,9 @@ function stopSession() {
   timerState = 'IDLE';
   timeLeft = 0;
 
-  if (overlayWindow) {
-    overlayWindow.close();
-    overlayWindow = null;
-  }
+  // Close all overlays if open
+  overlayWindows.forEach(win => win.close());
+  overlayWindows = [];
 
   if (mainWindow) {
     mainWindow.show();
