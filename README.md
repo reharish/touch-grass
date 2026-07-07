@@ -2,31 +2,32 @@
 
 > **Focus hard. Touch grass harder.**
 
-We've all been there: staring at compiler errors, writing React hooks, or debugging SQL queries for four hours straight without blinking. Your eyes are dry, your back is stiff, and you've forgotten what sunlight looks like. 
+You have been staring at VS Code for six hours. Your compiler is screaming, your flexbox layout is refusing to center, and you haven't blinked since your last git commit. Your body is currently composed of 70% caffeine, 20% stack overflow tabs, and 10% pure existential dread. 
 
-**Touch Grass** is a gorgeous, distraction-free desktop utility designed to save you from screen burnout. It runs silently in the background and dims your monitor when it's time to step away, stretch, hydrate, and reconnect with the real world.
+Your doctor said you need to go outside. We built a tool to make you.
+
+**Touch Grass** is a gorgeous, distraction-free desktop utility designed to save you from screen-induced burnout. It runs silently in the background, waiting. When your focus time is up, it forcibly (but gently) dims **all** of your connected monitors, rendering you temporarily useless to your employer so you can step away, stretch, drink water, and remember what a tree looks like.
 
 ---
 
 ## ✨ Features
 
-- **🎯 Simple Setup**: Choose the classic Pomodoro preset (25 min focus / 5 min break) or customize your own work and break sliders.
-- **🌫️ Fullscreen Zen Overlay**: When focus time ends, your primary monitor is dimmed with a smooth 40% opacity dark layer and glassmorphism backdrop blur. Content floats naturally in the center with no rectangular popup boxes.
-- **🧘 Zen Break Option**: Hide all text and suggestion panels during breaks, leaving only a gentle breathing leaf animation and a soft circular countdown timer.
-- **🔔 Programmatic Zen Chimes**: Pleasant transition sounds synthesized dynamically using the **Web Audio API**—no heavy audio binary files, working out of the box cross-platform.
-- **⌨️ Keyboard Shortcuts**: Pressed for time? Double-tap the `Escape` key (`Esc` + `Esc`) to immediately skip the break and return to focus mode.
-- **📥 Tray-only Mode**: Once you start a focus session, the dashboard closes automatically and runs inside your system tray displaying tooltips of remaining minutes. You can force breaks, pause, or quit directly from the tray context menu.
-- **💾 Settings Persistence**: Your focus durations, zen options, and sound toggles are saved locally and persist across application launches.
+- **🖥️ Multi-Screen Hostage Situation**: When it's break time, the app dims *every single one* of your connected monitors. Dimming one monitor while the other continues to blast 1000 nits of a stack overflow light-theme thread is not a break.
+- **🧘 Zen Mode (The "Leave Me Alone" Option)**: Hide all text and suggestion panels during breaks, leaving only a gentle breathing leaf animation and a circular countdown. It's like a screensaver for your nervous system.
+- **🔔 Non-Violent Chimes**: Dynamically synthesizes soothing transition chords using the **Web Audio API**. No generic system beep alarms that give you mini-heart attacks.
+- **⌨️ The Emergency Exit**: Double-press the `Escape` key (`Esc` + `Esc` within 1 second) to immediately skip the break. Use this only if your production database is literally on fire.
+- **📥 Tray-Only Ninja Mode**: Once you start a focus session, the dashboard vanishes entirely and runs in your system tray, updating its tooltip with your remaining time. 
+- **💾 Settings Persistence**: Remembers your custom work/break intervals, sound preferences, and zen toggles, because configuring a timer every time you launch it is too much work.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-You need [Node.js](https://nodejs.org) (v18+) and [npm](https://npmjs.com) installed on your system.
+You need [Node.js](https://nodejs.org) (v22 recommended) and [npm](https://npmjs.com) installed.
 
 ### Installation
-Clone this repository and install the development dependencies:
+Clone this repository and grab the packages:
 ```bash
 git clone https://github.com/reharish/touch-grass.git
 cd touch-grass
@@ -43,16 +44,16 @@ npm start
 
 ## 📦 Standalone Packaging (Linux Executables)
 
-You can compile **Touch Grass** into a standalone executable (an **AppImage** or a **.deb** installer) that runs on any Linux computer without requiring Node.js to be installed.
+You can compile **Touch Grass** into a standalone executable (an **AppImage** or a **.deb** installer) that runs natively on Linux without needing Node.js installed. We've optimized the package naming convention so it installs to `/opt/touch-grass/` (all lowercase, no spaces) to bypass Chromium's unprivileged user namespace zygote bugs. 
 
 To build the installers, run:
 ```bash
 npm run package
 ```
 
-The compiled binaries will be output to the newly created `dist/` directory:
-- `dist/Touch Grass-1.0.0.AppImage` (portable single-file executable)
-- `dist/touch-grass_1.0.0_amd64.deb` (Debian/Ubuntu installation package)
+The compiled binaries will be output to the `dist/` directory:
+- `dist/touch-grass-1.0.1.AppImage` (portable single-file executable)
+- `dist/touch-grass_1.0.1_amd64.deb` (Debian/Ubuntu installation package)
 
 ---
 
