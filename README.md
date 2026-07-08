@@ -53,8 +53,8 @@ npm run package
 ```
 
 The compiled binaries will be output to the `dist/` directory:
-- `dist/touch-grass-1.2.0.AppImage` (portable single-file executable)
-- `dist/touch-grass_1.2.0_amd64.deb` (Debian/Ubuntu installation package)
+- `dist/touch-grass-1.3.0.AppImage` (portable single-file executable)
+- `dist/touch-grass_1.3.0_amd64.deb` (Debian/Ubuntu installation package)
 
 ---
 
