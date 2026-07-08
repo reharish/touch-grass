@@ -64,7 +64,8 @@ function createMainWindow() {
     resizable: false,
     maximizable: false,
     frame: false,
-    transparent: true,
+    transparent: false,
+    backgroundColor: '#121212',
     title: 'Touch Grass',
     icon: path.join(__dirname, 'icon.png'),
     webPreferences: {

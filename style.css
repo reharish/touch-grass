@@ -24,7 +24,7 @@
 
 body {
   font-family: 'Outfit', sans-serif;
-  background: transparent;
+  background: #121212;
   color: var(--text-main);
   height: 680px;
   overflow: hidden;
@@ -32,8 +32,7 @@ body {
 
 /* Frameless Window Container */
 .app-container {
-  background: rgba(var(--bg-color-raw), 0.96);
-  backdrop-filter: blur(8px); /* Reduced from 25px for much better CPU performance */
+  background: #121212;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   width: 100%;
@@ -379,6 +378,10 @@ body {
   background: var(--primary-color);
   border-radius: 50%;
   box-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Only animate the pulse indicator when the running screen is active */
+.screen.active .pulse-indicator {
   animation: pulse 1.8s infinite;
 }
 
