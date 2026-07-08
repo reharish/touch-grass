@@ -18,6 +18,7 @@ Your doctor said you need to go outside. We built a tool to make you.
 - **⌨️ The Emergency Exit**: Double-press the `Escape` key (`Esc` + `Esc` within 1 second) to immediately skip the break. Use this only if your production database is literally on fire.
 - **📥 Tray-Only Ninja Mode**: Once you start a focus session, the dashboard vanishes entirely and runs in your system tray, updating its tooltip with your remaining time. 
 - **💾 Settings Persistence**: Remembers your custom work/break intervals, sound preferences, and zen toggles, because configuring a timer every time you launch it is too much work.
+- **⚡ CPU Optimized**: Near-zero idle CPU footprint. Keyframe animations are dynamically paused when screens are hidden, and the main dashboard uses solid opaque rendering to avoid heavy transparent GPU layer blending.
 
 ---
 
@@ -52,8 +53,8 @@ npm run package
 ```
 
 The compiled binaries will be output to the `dist/` directory:
-- `dist/touch-grass-1.0.1.AppImage` (portable single-file executable)
-- `dist/touch-grass_1.0.1_amd64.deb` (Debian/Ubuntu installation package)
+- `dist/touch-grass-1.2.0.AppImage` (portable single-file executable)
+- `dist/touch-grass_1.2.0_amd64.deb` (Debian/Ubuntu installation package)
 
 ---
 
