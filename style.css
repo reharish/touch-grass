@@ -32,8 +32,8 @@ body {
 
 /* Frameless Window Container */
 .app-container {
-  background: rgba(var(--bg-color-raw), 0.92);
-  backdrop-filter: blur(25px);
+  background: rgba(var(--bg-color-raw), 0.96);
+  backdrop-filter: blur(8px); /* Reduced from 25px for much better CPU performance */
   border: 1px solid var(--border-color);
   border-radius: 16px;
   width: 100%;
